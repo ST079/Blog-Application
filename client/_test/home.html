@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMC Blog Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e9b949;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --info: #3182ce;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.85), rgba(44, 82, 130, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e9b949' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .campus-brand {
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: white !important;
+        }
+
+        .btn-campus {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(26, 54, 93, 0.2);
+        }
+
+        .btn-campus:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(26, 54, 93, 0.3);
+        }
+
+        .btn-outline-campus {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 26px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-outline-campus:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(26, 54, 93, 0.2);
+        }
+
+        .topic-badge {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(26, 54, 93, 0.15);
+        }
+
+        .topic-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(26, 54, 93, 0.2);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e9b949' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .post-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .post-card img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e9b949' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            box-shadow: 0 4px 8px rgba(26, 54, 93, 0.2);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 25px;
+            font-size: 80px;
+            color: var(--accent);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .admin-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+        }
+
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .shape-1 {
+            top: 20%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .display-4 {
+                font-size: 2.5rem;
+            }
+
+            .floating-shape {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light py-3 nav-shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    <span class="text-white fw-bold">BMC</span>
+                </div>
+                <div>
+                    <span class="fs-5 fw-bold text-dark">Blog System</span>
+                    <br>
+                    <small class="text-muted">Bhaktapur Multiple Campus</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-campus" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="container content-wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">BMC Student Blog Portal</h1>
+                    <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">Your centralized platform
+                        for academic resources, administrative guidance, and campus updates</p>
+                    <div class="d-flex flex-wrap gap-3 animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="#" class="btn btn-lg btn-warning px-4 py-3 fw-bold">Explore Blogs</a>
+                        <a href="#" class="btn btn-lg btn-outline-light px-4 py-3 fw-bold">Submit Question</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="animate-float">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Student Collaboration" class="img-fluid rounded-3 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-6">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <div class="stat-number">250+</div>
+                        <p class="text-muted mb-0">Blog Posts</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <div class="stat-number">1.2K</div>
+                        <p class="text-muted mb-0">Active Users</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <div class="stat-number">15+</div>
+                        <p class="text-muted mb-0">Categories</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <div class="stat-number">98%</div>
+                        <p class="text-muted mb-0">Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Topics -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Popular Topics</h2>
+                <p class="text-muted">Explore the most discussed topics in our campus community</p>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <span class="topic-badge">Fee Payment</span>
+                <span class="topic-badge">Exam Schedule</span>
+                <span class="topic-badge">Lab Reports</span>
+                <span class="topic-badge">Scholarships</span>
+                <span class="topic-badge">Library Resources</span>
+                <span class="topic-badge">Course Registration</span>
+                <span class="topic-badge">Hostel Facilities</span>
+                <span class="topic-badge">Academic Calendar</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">How Our Blog System Helps You</h2>
+                <p class="text-muted">Discover the features designed to make your campus life easier</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-search fa-2x text-white"></i>
+                            </div>
+                            <h4 class="card-title">Find Solutions Quickly</h4>
+                            <p class="card-text">Search and find answers to common academic and administrative questions
+                                in one place.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-success rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-comments fa-2x text-white"></i>
+                            </div>
+                            <h4 class="card-title">Interactive Discussions</h4>
+                            <p class="card-text">Engage with other students and administrators through comments and
+                                questions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-warning rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-book-open fa-2x text-white"></i>
+                            </div>
+                            <h4 class="card-title">Organized Resources</h4>
+                            <p class="card-text">All blog posts are categorized by topics for easy navigation and
+                                discovery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Recent Blog Posts</h2>
+                <p class="text-muted">Stay updated with the latest campus information and resources</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="post-card card h-100">
+                        <img src="https://images.unsplash.com/photo-1582573618381-c9a77c31f6b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top" alt="Fee Payment">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Fee Payment</span>
+                            <h5 class="card-title">New Online Fee Payment System</h5>
+                            <p class="card-text">Learn how to use the new online portal for fee payments with our
+                                step-by-step guide.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <small class="text-muted"><i class="far fa-clock me-1"></i> Posted 2 days ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="post-card card h-100">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top" alt="Exam Schedule">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Exam Schedule</span>
+                            <h5 class="card-title">Final Exam Schedule for Spring 2023</h5>
+                            <p class="card-text">The complete schedule for final examinations has been published. Check
+                                your dates now.</p>
+                            <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <small class="text-muted"><i class="far fa-clock me-1"></i> Posted 5 days ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="post-card card h-100">
+                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top" alt="Lab Reports">
+                        <div class="card-body">
+                            <span class="badge bg-info mb-2">Lab Reports</span>
+                            <h5 class="card-title">Guidelines for Physics Lab Submissions</h5>
+                            <p class="card-text">Important guidelines and format requirements for submitting your
+                                physics lab reports.</p>
+                            <a href="#" class="btn btn-sm btn-outline-info">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <small class="text-muted"><i class="far fa-clock me-1"></i> Posted 1 week ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-campus">View All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">What Students Say</h2>
+                <p class="text-muted">Hear from students who have benefited from our blog system</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <p class="fst-italic">"This blog system saved me so much time when I was trying to figure out
+                            the fee payment process. The step-by-step guide was incredibly helpful!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Student" class="admin-avatar me-3">
+                            <div>
+                                <h6 class="mb-0">Rajan Shrestha</h6>
+                                <small class="text-muted">BSC CSIT, 3rd Year</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <p class="fst-italic">"I was confused about the exam schedule, but the blog post clarified
+                            everything. Now I can plan my study schedule effectively. Thank you!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Student" class="admin-avatar me-3">
+                            <div>
+                                <h6 class="mb-0">Sita Aryal</h6>
+                                <small class="text-muted">BBA, 2nd Year</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 cta-section">
+        <div class="container text-center py-4">
+            <h2 class="fw-bold mb-3">Have Questions About Campus Life?</h2>
+            <p class="lead mb-4">Our blog system is designed to help you navigate academic and administrative challenges
+            </p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a href="#" class="btn btn-lg btn-light text-primary px-4 py-2 fw-bold">Browse Topics</a>
+                <a href="#" class="btn btn-lg btn-outline-light px-4 py-2 fw-bold">Ask a Question</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4>BMC Blog System</h4>
+                    <p>Bhaktapur Multiple Campus</p>
+                    <p>Dudpati, Bhaktapur, Nepal</p>
+                    <p>Email: info@bmc.edu.np</p>
+                    <p>Phone: +977 1-6612345</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Blogs</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Categories</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Topics</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Academics</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Administration</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Exams</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Connect With Us</h5>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Subscribe to Updates</h5>
+                        <div class="input-group mt-2">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">© 2023 Bhaktapur Multiple Campus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+/* UserManager.css */
+:root {
+    --primary: #3a86ff;
+    --secondary: #8338ec;
+    --success: #38b000;
+    --warning: #ffbe0b;
+    --danger: #ff006e;
+    --light: #f8f9fa;
+    --dark: #212529;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  /* User Stats Section */
+  .stat-item {
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+  
+  .stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .stat-icon {
+    margin-bottom: 15px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--dark);
+  }
+  
+  .stat-label {
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  /* Search and Filters */
+  .search-bar .input-group-text {
+    background: white;
+    border-right: none;
+  }
+  
+  .search-bar .form-control {
+    border-left: none;
+    padding: 12px 15px;
+  }
+  
+  .filter-select {
+    width: auto;
+  }
+  
+  .filter-select .form-select {
+    border-radius: 6px;
+    padding: 10px 30px 10px 15px;
+  }
+  
+  /* User Table */
+  .user-table {
+    margin-bottom: 0;
+  }
+  
+  .user-table th {
+    border-top: none;
+    font-weight: 600;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    padding: 15px;
+  }
+  
+  .user-table td {
+    padding: 15px;
+    vertical-align: middle;
+  }
+  
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+  }
+  
+  .user-avatar-lg {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+  
+  /* User Cards */
+  .user-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+  
+  .user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Buttons */
+  .btn-campus {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-campus:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+    color: white;
+  }
+  
+  /* Badges */
+  .badge {
+    padding: 8px 12px;
+    border-radius: 50px;
+    font-weight: 500;
+  }
+  
+  /* Modal Styles */
+  .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+  }
+  
+  /* Footer */
+  .footer {
+    background: var(--dark);
+    color: white;
+    padding: 60px 0 20px;
+  }
+  
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+  }
+  
+  /* View Toggle Buttons */
+  .btn-group .btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .user-card {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .user-card:nth-child(1) { animation-delay: 0.1s; }
+  .user-card:nth-child(2) { animation-delay: 0.2s; }
+  .user-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .user-table {
+      font-size: 14px;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .filter-select {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    .d-flex.gap-2 {
+      flex-direction: column;
+    }
+    
+    .user-table th:nth-child(4),
+    .user-table td:nth-child(4),
+    .user-table th:nth-child(5),
+    .user-table td:nth-child(5) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .user-table th:nth-child(6),
+    .user-table td:nth-child(6),
+    .user-table th:nth-child(7),
+    .user-table td:nth-child(7) {
+      display: none;
+    }
+    
+    .stat-item {
+      padding: 15px;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+    }
+  }
