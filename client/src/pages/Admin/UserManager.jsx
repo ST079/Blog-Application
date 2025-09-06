@@ -327,7 +327,7 @@ const UserManager = () => {
                     value={roleFilter}
                     onChange={(e) => setRoleFilter(e.target.value)}
                   >
-                    <option value="All">All Roles</option>
+                    <option value="All">Roles</option>
                     <option value="Admin">Admin</option>
                     <option value="Editor">Editor</option>
                     <option value="Author">Author</option>
@@ -336,14 +336,15 @@ const UserManager = () => {
                 </div>
                 <div className="filter-select">
                   <select
-                    className="form-select"
+                    className="form-select me-2"
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
                   >
-                    <option value="All">All Status</option>
+                    <option value="All">Status</option>
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
                   </select>
+
                 </div>
                 <div className="filter-select">
                   <select
@@ -351,16 +352,17 @@ const UserManager = () => {
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                   >
+                    <option value="name">SortBy</option>
                     <option value="name">Name</option>
                     <option value="joinDate">Join Date</option>
                     <option value="posts">Posts</option>
                   </select>
                 </div>
                 <button
-                  className="btn btn-campus"
+                  className="btn btn-campus "
                   onClick={() => setShowAddUserModal(true)}
                 >
-                  <i className="fas fa-plus me-2"></i>Add User
+                  <i className="fas fa-plus me-2 mx-2" ></i>Add User
                 </button>
               </div>
             </div>
@@ -754,7 +756,7 @@ const UserManager = () => {
       )}
 
       {/* Footer */}
-      <footer className="footer">
+      {/* <footer className="footer">
         <div className="container">
           <div className="row">
             <div className="col-md-4 mb-4">
@@ -852,7 +854,7 @@ const UserManager = () => {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

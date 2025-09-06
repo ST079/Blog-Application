@@ -1,0 +1,4 @@
+.side-content {
+  margin-left: var(--sidebar-width);
+  transition: all 0.3s ease;
+}

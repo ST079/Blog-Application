@@ -1,0 +1,171 @@
+/* CollegeBlog.css */
+:root {
+  --primary: #3a86ff;
+  --secondary: #8338ec;
+  --success: #38b000;
+  --warning: #ffbe0b;
+  --danger: #ff006e;
+  --light: #f8f9fa;
+  --dark: #212529;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Navigation Bar */
+.navbar {
+  padding: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 120px 0 80px;
+  margin-top: 76px;
+}
+
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+.hero-image {
+  position: relative;
+}
+
+.hero-image:after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: 20px;
+  bottom: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Blog Cards */
+.blog-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--success) 0%, #2d9319 100%);
+  color: white;
+}
+
+/* Footer */
+.footer {
+  background: var(--dark);
+}
+
+.footer a:hover {
+  color: var(--primary) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Modal */
+.modal-content {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+  
+  .hero-image:after {
+    display: none;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Animation for elements */
+.blog-card, .testimonial-card {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom badge styling */
+.badge {
+  padding: 8px 12px;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+/* Form styling */
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(58, 134, 255, 0.25);
+}
+
+/* Backdrop for modals */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
