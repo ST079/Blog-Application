@@ -1,23 +1,10 @@
-const express = require('express');
+const express = require("express");
+const { register, login , getAllUsers,deleteUser,getUserById } = require("./user.controller");
 const router = express.Router();
 
-
-
-router.post("/register", (req, res,next) => {
-    try {
-        console.log("Register route");
-        res.json({ message: "User registered successfully" });
-    } catch (error) {
-        next(error);
-    }
- 
-});
-
-router.post("/login", (req, res) => {
-  console.log("Login route");
-});
-
-
-
+router.post("/register", register);
+router.post("/login", login);
+router.get("/:id", getUserById);
 
 module.exports = router;
+

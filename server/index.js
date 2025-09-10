@@ -9,7 +9,7 @@ const errorMiddleware = require("./middlewares/error-middleware");
 app.use(express.json());
 const PORT = process.env.PORT || 5000;
 connectDB();
-app.use(indexRouter);
+app.use(process.env.VERSION,indexRouter);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
