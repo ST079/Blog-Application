@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const { subscribe } = require("./userRouter");
-const { ObjectId } = Schema.Types;
 
 const userSchema = new Schema(
   {

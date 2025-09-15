@@ -103,8 +103,15 @@ const getUserById = async (req, res, next) => {
     next(error);
   }
 };
+// Update User 
+const updateUser = async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+};
 
-// Delete User (Placeholder)
+// Delete User
 const deleteUser = async (req, res, next) => {
   try {
     const userId = req.params.id;
@@ -112,7 +119,6 @@ const deleteUser = async (req, res, next) => {
     const user = await userSchema.findById(userId);
     const username = user.username;
     if(user){
-      // Placeholder for delete logic
       await userSchema.findByIdAndDelete(userId);
       res
         .status(200)
@@ -131,4 +137,5 @@ module.exports = {
   getAllUsers,
   getUserById,
   deleteUser,
+  updateUser,
 };
