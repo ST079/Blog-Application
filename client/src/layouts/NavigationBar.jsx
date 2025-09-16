@@ -1,58 +1,45 @@
 import React, { useState } from "react";
-
+import { Container, Row, Col, Button } from "react-bootstrap";
 const NavigationBar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   return (
-    <div class="container">
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a
-            href="/"
-            class="d-inline-flex link-body-emphasis text-decoration-none"
-          >
-            <img src="/logo.png" alt="" height={30} width={30} />
-          </a>
-        </div>
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li>
-            <a href="#" class="nav-link px-2 link-secondary">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link px-2">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link px-2">
-              Blogs
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link px-2">
-              FAQs
-            </a>
-          </li>
-        </ul>
-        <div class="col-md-3 text-end">
-          <button
-            type="button"
-            class="btn btn-outline-primary me-2"
-            onClick={() => setShowLoginModal(true)}
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            onClick={() => setShowSignupModal(true)}
-          >
-            Sign-up
-          </button>
-        </div>
+    <div>
+      {/* Header */}
+      <header className="blog-header">
+        <Container>
+          <Row className="align-items-center">
+            <Col md={6}>
+              <h1 className="blog-title">BlogSpace</h1>
+              <p className="blog-tagline">Discover. Learn. Grow.</p>
+            </Col>
+            <Col md={6} className="text-end">
+              <nav className="blog-nav">
+                <a href="#home">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary me-2"
+                    onClick={() => setShowLoginModal(true)}
+                  >
+                    Login
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={() => setShowSignupModal(true)}
+                  >
+                    Sign-up
+                  </button>
+                </div>
+              </nav>
+            </Col>
+          </Row>
+        </Container>
       </header>
 
       {/* Login Modal */}

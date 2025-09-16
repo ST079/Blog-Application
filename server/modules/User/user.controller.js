@@ -117,8 +117,8 @@ const deleteUser = async (req, res, next) => {
     const userId = req.params.id;
     console.log(userId);
     const user = await userSchema.findById(userId);
-    const username = user.username;
     if(user){
+      const username = user.username;
       await userSchema.findByIdAndDelete(userId);
       res
         .status(200)

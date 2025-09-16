@@ -1,852 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BMC Blog Management System</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogFlow - Creative Blog Management</title>
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Animate.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-      :root {
-        --primary: #1a365d;
-        --secondary: #2c5282;
-        --accent: #e9b949;
-        --light: #f8f9fa;
-        --dark: #2d3748;
-        --success: #38a169;
-        --danger: #e53e3e;
-        --warning: #dd6b20;
-        --info: #3182ce;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f5f7f9;
-        color: #333;
-        overflow-x: hidden;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
-      }
-
-      .hero-section {
-        background: linear-gradient(
-            135deg,
-            rgba(26, 54, 93, 0.85),
-            rgba(44, 82, 130, 0.9)
-          ),
-          url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80");
-        background-size: cover;
-        background-position: center;
-        color: white;
-        padding: 120px 0;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e9b949' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-        opacity: 0.3;
-      }
-
-      .campus-brand {
-        font-weight: 700;
-        color: var(--accent);
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-      }
-
-      .feature-card {
-        transition: all 0.3s ease;
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-        height: 100%;
-        background: white;
-      }
-
-      .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      }
-
-      .nav-shadow {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        background: white !important;
-      }
-
-      .btn-campus {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 12px 28px;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        border: none;
-        font-weight: 500;
-        box-shadow: 0 4px 8px rgba(26, 54, 93, 0.2);
-      }
-
-      .btn-campus:hover {
-        background: linear-gradient(135deg, var(--secondary), var(--primary));
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 15px rgba(26, 54, 93, 0.3);
-      }
-
-      .btn-outline-campus {
-        background: transparent;
-        color: var(--primary);
-        border: 2px solid var(--primary);
-        padding: 10px 26px;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-      }
-
-      .btn-outline-campus:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 15px rgba(26, 54, 93, 0.2);
-      }
-
-      .topic-badge {
-        background: linear-gradient(135deg, var(--secondary), var(--primary));
-        color: white;
-        padding: 8px 18px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        margin-right: 10px;
-        margin-bottom: 10px;
-        display: inline-block;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        box-shadow: 0 4px 8px rgba(26, 54, 93, 0.15);
-      }
-
-      .topic-badge:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(26, 54, 93, 0.2);
-      }
-
-      .footer {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 60px 0 30px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .footer::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e9b949' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        opacity: 0.1;
-      }
-
-      .post-card {
-        transition: all 0.3s ease;
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-        height: 100%;
-      }
-
-      .post-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-      }
-
-      .post-card img {
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-
-      .post-card:hover img {
-        transform: scale(1.05);
-      }
-
-      .cta-section {
-        background: linear-gradient(135deg, var(--secondary), var(--primary));
-        color: white;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e9b949' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        opacity: 0.2;
-      }
-
-      .navbar-brand {
-        display: flex;
-        align-items: center;
-      }
-
-      .logo-container {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 12px;
-        box-shadow: 0 4px 8px rgba(26, 54, 93, 0.2);
-      }
-
-      .animate-float {
-        animation: float 6s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(0px);
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #f5f5f5;
+            --accent-color: #ff6584;
+            --text-color: #333;
+            --light-text: #6c757d;
         }
-
-        50% {
-          transform: translateY(-12px);
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: #f8f9fa;
         }
-
-        100% {
-          transform: translateY(0px);
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 1.2;
-      }
-
-      .testimonial-card {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-        position: relative;
-        margin-top: 30px;
-      }
-
-      .testimonial-card::before {
-        content: '"';
-        position: absolute;
-        top: -20px;
-        left: 25px;
-        font-size: 80px;
-        color: var(--accent);
-        font-family: serif;
-        line-height: 1;
-      }
-
-      .admin-avatar {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--accent);
-      }
-
-      .floating-shape {
-        position: absolute;
-        opacity: 0.1;
-        z-index: 0;
-      }
-
-      .shape-1 {
-        top: 20%;
-        left: 5%;
-        width: 150px;
-        height: 150px;
-        background: var(--accent);
-        border-radius: 50%;
-      }
-
-      .shape-2 {
-        bottom: 10%;
-        right: 5%;
-        width: 100px;
-        height: 100px;
-        background: var(--primary);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      }
-
-      .content-wrapper {
-        position: relative;
-        z-index: 2;
-      }
-
-      /* Responsive adjustments */
-      @media (max-width: 768px) {
-        .hero-section {
-          padding: 80px 0;
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
         }
-
-        .display-4 {
-          font-size: 2.5rem;
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
         }
-
-        .floating-shape {
-          display: none;
+        
+        .btn-primary:hover {
+            background-color: #554fd8;
+            border-color: #554fd8;
         }
-      }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .sidebar .nav-link {
+            color: var(--text-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .ad-container {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .blog-stats {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .recent-post {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .blog-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .category-badge {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        footer {
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        /* Animation for cards */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
     </style>
-  </head>
+</head>
+<body>
+    <div id="root"></div>
 
-  <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light py-3 nav-shadow fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <div class="logo-container">
-            <span class="text-white fw-bold">BMC</span>
-          </div>
-          <div>
-            <span class="fs-5 fw-bold text-dark">Blog System</span>
-            <br />
-            <small class="text-muted">Bhaktapur Multiple Campus</small>
-          </div>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link text-dark active" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Blogs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Categories</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Contact</a>
-            </li>
-            <li class="nav-item ms-2">
-              <a class="btn btn-campus" href="#">Login</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="floating-shape shape-1"></div>
-      <div class="floating-shape shape-2"></div>
-      <div class="container content-wrapper">
-        <div class="row align-items-center">
-          <div class="col-lg-7">
-            <h1
-              class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp"
-            >
-              BMC Student Blog Portal
-            </h1>
-            <p
-              class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s"
-            >
-              Your centralized platform for academic resources, administrative
-              guidance, and campus updates
-            </p>
-            <div
-              class="d-flex flex-wrap gap-3 animate__animated animate__fadeInUp animate__delay-2s"
-            >
-              <a href="#" class="btn btn-lg btn-warning px-4 py-3 fw-bold"
-                >Explore Blogs</a
-              >
-              <a href="#" class="btn btn-lg btn-outline-light px-4 py-3 fw-bold"
-                >Submit Question</a
-              >
-            </div>
-          </div>
-          <div class="col-lg-5 d-none d-lg-block">
-            <div class="animate-float">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                alt="Student Collaboration"
-                class="img-fluid rounded-3 shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row g-4 text-center">
-          <div class="col-md-3 col-6">
-            <div class="p-4 bg-white rounded-3 shadow-sm">
-              <div class="stat-number">250+</div>
-              <p class="text-muted mb-0">Blog Posts</p>
-            </div>
-          </div>
-          <div class="col-md-3 col-6">
-            <div class="p-4 bg-white rounded-3 shadow-sm">
-              <div class="stat-number">1.2K</div>
-              <p class="text-muted mb-0">Active Users</p>
-            </div>
-          </div>
-          <div class="col-md-3 col-6">
-            <div class="p-4 bg-white rounded-3 shadow-sm">
-              <div class="stat-number">15+</div>
-              <p class="text-muted mb-0">Categories</p>
-            </div>
-          </div>
-          <div class="col-md-3 col-6">
-            <div class="p-4 bg-white rounded-3 shadow-sm">
-              <div class="stat-number">98%</div>
-              <p class="text-muted mb-0">Satisfaction Rate</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Topics -->
-    <section class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold">Popular Topics</h2>
-          <p class="text-muted">
-            Explore the most discussed topics in our campus community
-          </p>
-        </div>
-        <div class="d-flex flex-wrap justify-content-center">
-          <span class="topic-badge">Fee Payment</span>
-          <span class="topic-badge">Exam Schedule</span>
-          <span class="topic-badge">Lab Reports</span>
-          <span class="topic-badge">Scholarships</span>
-          <span class="topic-badge">Library Resources</span>
-          <span class="topic-badge">Course Registration</span>
-          <span class="topic-badge">Hostel Facilities</span>
-          <span class="topic-badge">Academic Calendar</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold">How Our Blog System Helps You</h2>
-          <p class="text-muted">
-            Discover the features designed to make your campus life easier
-          </p>
-        </div>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="feature-card">
-              <div class="card-body text-center p-4">
-                <div class="bg-primary rounded-circle d-inline-flex p-3 mb-3">
-                  <i class="fas fa-search fa-2x text-white"></i>
-                </div>
-                <h4 class="card-title">Find Solutions Quickly</h4>
-                <p class="card-text">
-                  Search and find answers to common academic and administrative
-                  questions in one place.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="feature-card">
-              <div class="card-body text-center p-4">
-                <div class="bg-success rounded-circle d-inline-flex p-3 mb-3">
-                  <i class="fas fa-comments fa-2x text-white"></i>
-                </div>
-                <h4 class="card-title">Interactive Discussions</h4>
-                <p class="card-text">
-                  Engage with other students and administrators through comments
-                  and questions.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="feature-card">
-              <div class="card-body text-center p-4">
-                <div class="bg-warning rounded-circle d-inline-flex p-3 mb-3">
-                  <i class="fas fa-book-open fa-2x text-white"></i>
-                </div>
-                <h4 class="card-title">Organized Resources</h4>
-                <p class="card-text">
-                  All blog posts are categorized by topics for easy navigation
-                  and discovery.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Recent Posts -->
-    <section class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold">Recent Blog Posts</h2>
-          <p class="text-muted">
-            Stay updated with the latest campus information and resources
-          </p>
-        </div>
-        <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <div class="post-card card h-100">
-              <img
-                src="https://images.unsplash.com/photo-1582573618381-c9a77c31f6b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                class="card-img-top"
-                alt="Fee Payment"
-              />
-              <div class="card-body">
-                <span class="badge bg-primary mb-2">Fee Payment</span>
-                <h5 class="card-title">New Online Fee Payment System</h5>
-                <p class="card-text">
-                  Learn how to use the new online portal for fee payments with
-                  our step-by-step guide.
-                </p>
-                <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
-              </div>
-              <div class="card-footer bg-white">
-                <small class="text-muted"
-                  ><i class="far fa-clock me-1"></i> Posted 2 days ago</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="post-card card h-100">
-              <img
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                class="card-img-top"
-                alt="Exam Schedule"
-              />
-              <div class="card-body">
-                <span class="badge bg-success mb-2">Exam Schedule</span>
-                <h5 class="card-title">Final Exam Schedule for Spring 2023</h5>
-                <p class="card-text">
-                  The complete schedule for final examinations has been
-                  published. Check your dates now.
-                </p>
-                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
-              </div>
-              <div class="card-footer bg-white">
-                <small class="text-muted"
-                  ><i class="far fa-clock me-1"></i> Posted 5 days ago</small
-                >
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="post-card card h-100">
-              <img
-                src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                class="card-img-top"
-                alt="Lab Reports"
-              />
-              <div class="card-body">
-                <span class="badge bg-info mb-2">Lab Reports</span>
-                <h5 class="card-title">
-                  Guidelines for Physics Lab Submissions
-                </h5>
-                <p class="card-text">
-                  Important guidelines and format requirements for submitting
-                  your physics lab reports.
-                </p>
-                <a href="#" class="btn btn-sm btn-outline-info">Read More</a>
-              </div>
-              <div class="card-footer bg-white">
-                <small class="text-muted"
-                  ><i class="far fa-clock me-1"></i> Posted 1 week ago</small
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <a href="#" class="btn btn-campus">View All Posts</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold">What Students Say</h2>
-          <p class="text-muted">
-            Hear from students who have benefited from our blog system
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="testimonial-card">
-              <p class="fst-italic">
-                "This blog system saved me so much time when I was trying to
-                figure out the fee payment process. The step-by-step guide was
-                incredibly helpful!"
-              </p>
-              <div class="d-flex align-items-center mt-3">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                  alt="Student"
-                  class="admin-avatar me-3"
-                />
-                <div>
-                  <h6 class="mb-0">Rajan Shrestha</h6>
-                  <small class="text-muted">BSC CSIT, 3rd Year</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="testimonial-card">
-              <p class="fst-italic">
-                "I was confused about the exam schedule, but the blog post
-                clarified everything. Now I can plan my study schedule
-                effectively. Thank you!"
-              </p>
-              <div class="d-flex align-items-center mt-3">
-                <img
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                  alt="Student"
-                  class="admin-avatar me-3"
-                />
-                <div>
-                  <h6 class="mb-0">Sita Aryal</h6>
-                  <small class="text-muted">BBA, 2nd Year</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-5 cta-section">
-      <div class="container text-center py-4">
-        <h2 class="fw-bold mb-3">Have Questions About Campus Life?</h2>
-        <p class="lead mb-4">
-          Our blog system is designed to help you navigate academic and
-          administrative challenges
-        </p>
-        <div class="d-flex justify-content-center flex-wrap gap-3">
-          <a
-            href="#"
-            class="btn btn-lg btn-light text-primary px-4 py-2 fw-bold"
-            >Browse Topics</a
-          >
-          <a href="#" class="btn btn-lg btn-outline-light px-4 py-2 fw-bold"
-            >Ask a Question</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 mb-4">
-            <h4>BMC Blog System</h4>
-            <p>Bhaktapur Multiple Campus</p>
-            <p>Dudpati, Bhaktapur, Nepal</p>
-            <p>Email: info@bmc.edu.np</p>
-            <p>Phone: +977 1-6612345</p>
-          </div>
-          <div class="col-md-2 mb-4">
-            <h5>Quick Links</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="text-white text-decoration-none">Home</a>
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none">Blogs</a>
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none"
-                  >Categories</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none">About</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-2 mb-4">
-            <h5>Topics</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="text-white text-decoration-none"
-                  >Academics</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none"
-                  >Administration</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none">Exams</a>
-              </li>
-              <li>
-                <a href="#" class="text-white text-decoration-none"
-                  >Resources</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4 mb-4">
-            <h5>Connect With Us</h5>
-            <div class="d-flex gap-3 mt-3">
-              <a href="#" class="text-white"
-                ><i class="fab fa-facebook-f fa-lg"></i
-              ></a>
-              <a href="#" class="text-white"
-                ><i class="fab fa-twitter fa-lg"></i
-              ></a>
-              <a href="#" class="text-white"
-                ><i class="fab fa-instagram fa-lg"></i
-              ></a>
-              <a href="#" class="text-white"
-                ><i class="fab fa-linkedin-in fa-lg"></i
-              ></a>
-              <a href="#" class="text-white"
-                ><i class="fab fa-youtube fa-lg"></i
-              ></a>
-            </div>
-            <div class="mt-4">
-              <h5>Subscribe to Updates</h5>
-              <div class="input-group mt-2">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Your email"
-                />
-                <button class="btn btn-warning" type="button">Subscribe</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr class="bg-light" />
-        <div class="text-center py-3">
-          <p class="mb-0">
-            © 2023 Bhaktapur Multiple Campus. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
+    <!-- React and ReactDOM from CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+
+    <script type="text/babel">
+        // Blog data - in a real app, this would come from an API
+        const blogData = {
+            posts: [
+                {
+                    id: 1,
+                    title: "Getting Started with React Hooks",
+                    excerpt: "Learn how to use React Hooks to simplify your functional components and manage state effectively.",
+                    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                    category: "React",
+                    date: "2023-05-15",
+                    views: 1245,
+                    comments: 23
+                },
+                {
+                    id: 2,
+                    title: "The Ultimate Guide to Bootstrap 5",
+                    excerpt: "Discover all the new features and improvements in Bootstrap 5 and how to use them in your projects.",
+                    image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                    category: "Bootstrap",
+                    date: "2023-05-10",
+                    views: 987,
+                    comments: 18
+                },
+                {
+                    id: 3,
+                    title: "Creating Beautiful UI Animations",
+                    excerpt: "Learn how to create smooth, performant animations that enhance user experience without compromising performance.",
+                    image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+                    category: "UI/UX",
+                    date: "2023-05-05",
+                    views: 1567,
+                    comments: 32
+                },
+                {
+                    id: 4,
+                    title: "SEO Best Practices for Developers",
+                    excerpt: "Implement these SEO techniques to improve your website's visibility and ranking on search engines.",
+                    image: "https://images.unsplash.com/photo-1506983702976-1153e155a52d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                    category: "SEO",
+                    date: "2023-05-01",
+                    views: 2104,
+                    comments: 41
+                }
+            ],
+            stats: {
+                totalPosts: 42,
+                totalViews: 45876,
+                totalComments: 542,
+                monthlyVisitors: 12453
+            },
+            recentPosts: [
+                { id: 1, title: "Getting Started with React Hooks", date: "2023-05-15" },
+                { id: 2, title: "The Ultimate Guide to Bootstrap 5", date: "2023-05-10" },
+                { id: 3, title: "Creating Beautiful UI Animations", date: "2023-05-05" }
+            ]
+        };
+
+        // Ad components data
+        const adComponents = [
+            {
+                title: "Premium Hosting",
+                description: "Get 50% off on our premium hosting plans. Limited time offer!",
+                cta: "Learn More"
+            },
+            {
+                title: "UI Design Course",
+                description: "Master UI design with our comprehensive course. Enroll now!",
+                cta: "View Course"
+            }
+        ];
+
+        // Main App Component
+        function App() {
+            return (
+                <div>
+                    <Header />
+                    <div className="container mt-4">
+                        <div className="row">
+                            <div className="col-lg-3">
+                                <Sidebar />
+                                <AdsSection />
+                            </div>
+                            <div className="col-lg-9">
+                                <DashboardStats />
+                                <BlogPosts />
+                            </div>
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            );
+        }
+
+        // Header Component
+        function Header() {
+            return (
+                <nav className="navbar navbar-expand-lg navbar-light bg-white">
+                    <div className="container">
+                        <a className="navbar-brand" href="#">BlogFlow</a>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav me-auto">
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#">Dashboard</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">Posts</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">Analytics</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">Settings</a>
+                                </li>
+                            </ul>
+                            <div className="d-flex align-items-center">
+                                <button className="btn btn-outline-secondary me-2">
+                                    <i className="bi bi-bell"></i>
+                                </button>
+                                <div className="dropdown">
+                                    <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i className="bi bi-plus-lg"></i> New Post
+                                    </button>
+                                    <ul className="dropdown-menu">
+                                        <li><a className="dropdown-item" href="#">Article</a></li>
+                                        <li><a className="dropdown-item" href="#">Video</a></li>
+                                        <li><a className="dropdown-item" href="#">Podcast</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+
+        // Sidebar Component
+        function Sidebar() {
+            return (
+                <div className="sidebar mb-4">
+                    <h5 className="mb-3">Management</h5>
+                    <ul className="nav flex-column">
+                        <li className="nav-item">
+                            <a className="nav-link active" href="#">
+                                <i className="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-file-text"></i> Posts
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-tags"></i> Categories
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-chat-left-text"></i> Comments
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-graph-up"></i> Analytics
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <i className="bi bi-gear"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <h5 className="mt-4 mb-3">Recent Posts</h5>
+                    {blogData.recentPosts.map(post => (
+                        <div key={post.id} className="recent-post">
+                            <h6>{post.title}</h6>
+                            <small className="text-muted">{new Date(post.date).toLocaleDateString()}</small>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // Ads Section Component
+        function AdsSection() {
+            return (
+                <div>
+                    {adComponents.map((ad, index) => (
+                        <div key={index} className="ad-container">
+                            <h6>{ad.title}</h6>
+                            <p className="small">{ad.description}</p>
+                            <button className="btn btn-sm btn-outline-primary">{ad.cta}</button>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // Dashboard Stats Component
+        function DashboardStats() {
+            return (
+                <div className="blog-stats mb-4">
+                    <h4 className="mb-4">Dashboard Overview</h4>
+                    <div className="row">
+                        <div className="col-md-3 col-6 mb-3">
+                            <div className="text-center">
+                                <div className="stat-number">{blogData.stats.totalPosts}</div>
+                                <div>Total Posts</div>
+                            </div>
+                        </div>
+                        <div className="col-md-3 col-6 mb-3">
+                            <div className="text-center">
+                                <div className="stat-number">{blogData.stats.totalViews}</div>
+                                <div>Total Views</div>
+                            </div>
+                        </div>
+                        <div className="col-md-3 col-6 mb-3">
+                            <div className="text-center">
+                                <div className="stat-number">{blogData.stats.totalComments}</div>
+                                <div>Total Comments</div>
+                            </div>
+                        </div>
+                        <div className="col-md-3 col-6 mb-3">
+                            <div className="text-center">
+                                <div className="stat-number">{blogData.stats.monthlyVisitors}</div>
+                                <div>Monthly Visitors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Blog Posts Component
+        function BlogPosts() {
+            return (
+                <div>
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                        <h4>Recent Blog Posts</h4>
+                        <div>
+                            <button className="btn btn-outline-secondary me-2">
+                                <i className="bi bi-filter"></i> Filter
+                            </button>
+                            <button className="btn btn-primary">
+                                <i className="bi bi-plus-lg"></i> New Post
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div className="row">
+                        {blogData.posts.map((post, index) => (
+                            <div key={post.id} className={`col-md-6 mb-4 animated-card delay-${index}`}>
+                                <div className="card blog-card h-100">
+                                    <img src={post.image} className="card-img-top" alt={post.title} />
+                                    <div className="card-body">
+                                        <div className="d-flex justify-content-between align-items-center mb-2">
+                                            <span className="category-badge">{post.category}</span>
+                                            <small className="text-muted">{new Date(post.date).toLocaleDateString()}</small>
+                                        </div>
+                                        <h5 className="card-title">{post.title}</h5>
+                                        <p className="card-text">{post.excerpt}</p>
+                                    </div>
+                                                                        <div className="card-footer bg-white d-flex justify-content-between">
+                                        <small className="text-muted">
+                                            <i className="bi bi-eye me-1"></i> {post.views} views
+                                        </small>
+                                        <small className="text-muted">
+                                            <i className="bi bi-chat me-1"></i> {post.comments} comments
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="d-flex justify-content-center mt-4">
+                        <button className="btn btn-outline-primary">
+                            Load More Posts <i className="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Footer Component
+        function Footer() {
+            return (
+                <footer>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <h5>BlogFlow</h5>
+                                <p className="text-muted">A modern platform for managing your blog content with ease.</p>
+                            </div>
+                            <div className="col-md-3">
+                                <h6>Quick Links</h6>
+                                <ul className="list-unstyled">
+                                    <li><a href="#" className="text-muted text-decoration-none">Home</a></li>
+                                    <li><a href="#" className="text-muted text-decoration-none">Features</a></li>
+                                    <li><a href="#" className="text-muted text-decoration-none">Pricing</a></li>
+                                    <li><a href="#" className="text-muted text-decoration-none">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div className="col-md-3">
+                                <h6>Connect With Us</h6>
+                                <div className="d-flex gap-3">
+                                    <a href="#" className="text-muted"><i className="bi bi-twitter"></i></a>
+                                    <a href="#" className="text-muted"><i className="bi bi-facebook"></i></a>
+                                    <a href="#" className="text-muted"><i className="bi bi-instagram"></i></a>
+                                    <a href="#" className="text-muted"><i className="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                            <div className="col-md-6">
+                                <p className="text-muted">© 2023 BlogFlow. All rights reserved.</p>
+                            </div>
+                            <div className="col-md-6 text-md-end">
+                                <a href="#" className="text-muted text-decoration-none me-3">Privacy Policy</a>
+                                <a href="#" className="text-muted text-decoration-none">Terms of Service</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Render the App
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
 </html>
-
-<span className="fw-bold text-primary">BMC</span> Blog
-
-<div class="container">
-  <div
-    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-  >
-    <a
-      href="/"
-      class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-    >
-      <svg
-        class="bi me-2"
-        width="40"
-        height="32"
-        role="img"
-        aria-label="Bootstrap"
-      >
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-    </a>
-    <ul
-      class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-    >
-      <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-    </ul>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-      <input
-        type="search"
-        class="form-control form-control-dark text-bg-dark"
-        placeholder="Search..."
-        aria-label="Search"
-      />
-    </form>
-    <div class="text-end">
-      <button type="button" class="btn btn-outline-light me-2">Login</button>
-      <button type="button" class="btn btn-warning">Sign-up</button>
-    </div>
-  </div>
-</div>
